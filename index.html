@@ -487,6 +487,7 @@ footer .copy-line{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.12);pa
           <label for="rName">الاسم<input id="rName" type="text" autocomplete="name" required></label>
           <label for="rRole">صفتك ومدينتك<input id="rRole" type="text" placeholder="مثال: معلمة، جدة" required></label>
         </div>
+        <label for="rPhone">رقم الجوال (اختياري، للتحقق فقط ولا يُنشر)<input id="rPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="05xxxxxxxx"></label>
         <fieldset class="rating" id="rating">
           <legend>تقييمك</legend>
           <div class="stars-in">
@@ -638,10 +639,10 @@ footer .copy-line{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.12);pa
   rf.addEventListener('submit',function(e){
     e.preventDefault();
     var n=document.getElementById('rName').value.trim(),r=document.getElementById('rRole').value.trim(),t=document.getElementById('rText').value.trim(),c=document.getElementById('rConsent').checked;
-    var st=(rf.querySelector('input[name=stars]:checked')||{}).value||'5';
+    var st=(rf.querySelector('input[name=stars]:checked')||{}).value||'5';var ph=document.getElementById('rPhone').value.trim();
     if(!n||!r||!t||!c){rf.classList.add('invalid');return;}
     rf.classList.remove('invalid');
-    var text='رأي عميل لنشره في صفحة ثقة:\nالاسم: '+n+'\nالصفة: '+r+'\nالتقييم: '+st+'/5\nالرأي: '+t+'\nأوافق على نشر رأيي باسمي.';
+    var text='رأي عميل لنشره في صفحة ثقة:\nالاسم: '+n+'\nالصفة: '+r+'\nالتقييم: '+st+'/5\nالرأي: '+t+(ph?'\nالجوال: '+ph:'')+'\nأوافق على نشر رأيي باسمي.';
     document.getElementById('rOut').value=text;
     document.getElementById('rWa').href='https://wa.me/966531531267?text='+encodeURIComponent(text);
     var res=document.getElementById('rResult'),fb=document.getElementById('rFallback'),msg=document.getElementById('rMsg');
@@ -649,7 +650,7 @@ footer .copy-line{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.12);pa
     function showFallback(){msg.hidden=true;fb.hidden=false;res.classList.add('show');btn.disabled=false;}
     if(!REVIEWS_API){showFallback();return;}
     btn.disabled=true;btn.textContent='جارٍ الإرسال...';
-    var fd=new FormData();fd.append('name',n);fd.append('role',r);fd.append('stars',st);fd.append('text',t);
+    var fd=new FormData();fd.append('name',n);fd.append('role',r);fd.append('stars',st);fd.append('text',t);fd.append('phone',ph);
     fetch(REVIEWS_API,{method:'POST',body:fd}).then(function(){
       msg.hidden=false;fb.hidden=true;res.classList.add('show');
       btn.textContent='تم الإرسال';rf.reset();
