@@ -474,12 +474,13 @@ footer .copy-line{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.12);pa
       <span class="eyebrow">آراء العملاء</span>
       <h2>رأيك يهمنا</h2>
     </div>
+    <div class="grid3" id="reviewsGrid" hidden></div>
     <p class="note" id="noReviews">لم تُنشر آراء بعد. كن أول من يشاركنا تجربته.</p>
 
     <div class="share">
       <div class="share-text">
         <h3>تعاملت معنا؟ شاركنا رأيك</h3>
-        <p>رأيك يصلنا مباشرة على واتساب، ولا يُنشر في الصفحة إلا بعد موافقتك.</p>
+        <p>يُحفظ رأيك فوراً ويظهر في الصفحة بعد مراجعته واعتماده.</p>
       </div>
       <form id="reviewForm" class="share-form" novalidate>
         <div class="f2">
@@ -501,12 +502,15 @@ footer .copy-line{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.12);pa
         <span class="err" id="rErr">يرجى تعبئة الاسم والصفة والرأي والموافقة على النشر.</span>
         <button class="btn btn-solid" type="submit">إرسال رأيي</button>
         <div class="result" id="rResult">
-          <span>شكراً لك. اضغط الزر لإرسال رأيك عبر واتساب، أو انسخه وأرسله بنفسك.</span>
+          <span id="rMsg">شكراً لك، وصلنا رأيك وسيظهر بعد اعتماده.</span>
+          <div id="rFallback" hidden style="display:flex;flex-direction:column;gap:12px">
+          <span>تعذّر الإرسال المباشر. اضغط الزر لإرسال رأيك عبر واتساب، أو انسخه وأرسله بنفسك.</span>
           <div style="display:flex;gap:10px;flex-wrap:wrap">
             <a class="btn btn-solid" id="rWa" href="https://wa.me/966531531267" target="_blank" rel="noopener">إرسال عبر واتساب</a>
             <button class="btn btn-secondary" type="button" id="rCopy">نسخ النص</button>
           </div>
           <textarea id="rOut" readonly aria-label="نص الرأي" style="height:110px"></textarea>
+          </div>
         </div>
       </form>
     </div>
@@ -614,6 +618,22 @@ footer .copy-line{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.12);pa
     document.getElementById('waLink').href='https://wa.me/966531531267?text='+encodeURIComponent(text);
     document.getElementById('result').classList.add('show');
   });
+  // ===== الآراء: رابط تطبيق Google Apps Script (يُترك فارغاً حتى يُربط) =====
+  var REVIEWS_API='https://script.google.com/macros/s/AKfycbzN-ls75nkyTJyAJpfqkNJ9twKtJhPPCWc4qgU7UXvIxx-SK9y1pcRUCUpyW91idFPy/exec';
+  function esc(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function renderReviews(list){
+    var g=document.getElementById('reviewsGrid'),n=document.getElementById('noReviews');
+    if(!list||!list.length){g.hidden=true;n.hidden=false;return;}
+    g.innerHTML=list.slice(0,9).map(function(r){
+      var st='★★★★★'.slice(0,Math.max(1,Math.min(5,r.stars|0)));
+      var init=(r.name||'').trim().charAt(0)||'ث';
+      return '<div class="quote"><div class="stars">'+st+'</div><p>"'+esc(r.text)+'"</p><div class="who"><div class="av">'+esc(init)+'</div><div><b>'+esc(r.name)+'</b><br>'+esc(r.role||'')+'</div></div></div>';
+    }).join('');
+    g.hidden=false;n.hidden=true;
+  }
+  if(REVIEWS_API){
+    fetch(REVIEWS_API,{method:'GET'}).then(function(r){return r.json();}).then(renderReviews).catch(function(){});
+  }
   var rf=document.getElementById('reviewForm');
   rf.addEventListener('submit',function(e){
     e.preventDefault();
@@ -624,7 +644,18 @@ footer .copy-line{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.12);pa
     var text='رأي عميل لنشره في صفحة ثقة:\nالاسم: '+n+'\nالصفة: '+r+'\nالتقييم: '+st+'/5\nالرأي: '+t+'\nأوافق على نشر رأيي باسمي.';
     document.getElementById('rOut').value=text;
     document.getElementById('rWa').href='https://wa.me/966531531267?text='+encodeURIComponent(text);
-    document.getElementById('rResult').classList.add('show');
+    var res=document.getElementById('rResult'),fb=document.getElementById('rFallback'),msg=document.getElementById('rMsg');
+    var btn=rf.querySelector('button[type=submit]');
+    function showFallback(){msg.hidden=true;fb.hidden=false;res.classList.add('show');btn.disabled=false;}
+    if(!REVIEWS_API){showFallback();return;}
+    btn.disabled=true;btn.textContent='جارٍ الإرسال...';
+    var fd=new FormData();fd.append('name',n);fd.append('role',r);fd.append('stars',st);fd.append('text',t);
+    fetch(REVIEWS_API,{method:'POST',body:fd}).then(function(){
+      msg.hidden=false;fb.hidden=true;res.classList.add('show');
+      btn.textContent='تم الإرسال';rf.reset();
+    }).catch(function(){
+      fetch(REVIEWS_API,{method:'POST',body:fd,mode:'no-cors'}).then(function(){msg.hidden=false;fb.hidden=true;res.classList.add('show');btn.textContent='تم الإرسال';}).catch(showFallback);
+    });
   });
   document.getElementById('rCopy').addEventListener('click',function(){var ta=document.getElementById('rOut');var el=this;if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(ta.value).then(function(){var o=el.textContent;el.textContent='تم النسخ';setTimeout(function(){el.textContent=o;},1500);}).catch(function(){ta.focus();ta.select();});}else{ta.focus();ta.select();}});
   document.getElementById('copyMsg').addEventListener('click',function(){copyText(document.getElementById('msgOut').value,this);});
