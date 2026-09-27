@@ -523,7 +523,7 @@ footer .copy-line{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.12);pa
     <div class="sec-head">
       <span class="eyebrow">تواصل معنا</span>
       <h2>احجز استشارتك المجانية</h2>
-      <p>املأ النموذج وسنجهّز لك رسالة واتساب جاهزة بالتفاصيل، أو راسلنا مباشرة.</p>
+      <p>املأ النموذج، يُسجَّل طلبك فوراً وتُجهَّز لك رسالة واتساب بالتفاصيل لنبدأ الحوار مباشرة.</p>
     </div>
     <div class="book">
       <form id="bookForm" novalidate>
@@ -597,6 +597,8 @@ footer .copy-line{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.12);pa
 
 <script>
 (function(){
+  // رابط تطبيق Google Apps Script (الآراء + نسخة الحجوزات)
+  var REVIEWS_API='https://script.google.com/macros/s/AKfycbzN-ls75nkyTJyAJpfqkNJ9twKtJhPPCWc4qgU7UXvIxx-SK9y1pcRUCUpyW91idFPy/exec';
   var btn=document.getElementById('menuBtn'),links=document.getElementById('links');
   btn.addEventListener('click',function(){var o=links.classList.toggle('open');btn.setAttribute('aria-expanded',o?'true':'false');});
   links.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){links.classList.remove('open');btn.setAttribute('aria-expanded','false');});});
@@ -618,9 +620,12 @@ footer .copy-line{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.12);pa
     document.getElementById('msgOut').value=text;
     document.getElementById('waLink').href='https://wa.me/966531531267?text='+encodeURIComponent(text);
     document.getElementById('result').classList.add('show');
+    if(REVIEWS_API){
+      var bd=new FormData();bd.append('kind','booking');bd.append('name',name);bd.append('phone',phone);bd.append('service',service);bd.append('msg',msg);
+      fetch(REVIEWS_API,{method:'POST',body:bd}).catch(function(){fetch(REVIEWS_API,{method:'POST',body:bd,mode:'no-cors'}).catch(function(){});});
+    }
   });
-  // ===== الآراء: رابط تطبيق Google Apps Script (يُترك فارغاً حتى يُربط) =====
-  var REVIEWS_API='https://script.google.com/macros/s/AKfycbzN-ls75nkyTJyAJpfqkNJ9twKtJhPPCWc4qgU7UXvIxx-SK9y1pcRUCUpyW91idFPy/exec';
+  // ===== الآراء =====
   function esc(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
   function renderReviews(list){
     var g=document.getElementById('reviewsGrid'),n=document.getElementById('noReviews');
