@@ -1,6 +1,17 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>منصة ثقة</title>
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ثقة للاستشارات التعليمية والتربوية</title>
+<meta name="description" content="ثقة: مكتب مرخّص للاستشارات التعليمية والتربوية. ملفات إنجاز، تقارير مدرسية، حقائب تدريبية، واستشارات للطلاب والمعلمين والمدارس والباحثين.">
+<meta name="theme-color" content="#0F5C6E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 6 L54 14 V32 C54 45 44 54 32 59 C20 54 10 45 10 32 V14 Z' fill='%230F5C6E'/%3E%3Cpath d='M21 33 L29 41 L44 24' stroke='%23fff' stroke-width='5.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='22' cy='20' r='3' fill='%23D9A441'/%3E%3Ccircle cx='32' cy='16' r='3.4' fill='%23D9A441'/%3E%3Ccircle cx='42' cy='12' r='3.8' fill='%23D9A441'/%3E%3C/svg%3E">
+<style>:root{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <style>
 :root{
   --brand-600:#0F5C6E;--brand-700:#0B4553;--brand-500:#1F7F93;--brand-100:#CFE3E8;
@@ -48,6 +59,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .btn-secondary{background:transparent;color:var(--brand-600);border-color:var(--brand-600)}
 .btn-secondary:hover{background:var(--brand-100)}
 .btn-solid{background:var(--brand-600);color:var(--ink-on-brand)}
+.btn-ghost{background:var(--surface-100);color:var(--ink-900);border-color:var(--border-200)}
+.btn-ghost:hover{border-color:var(--brand-600);color:var(--brand-600)}
 .btn-solid:hover{background:var(--brand-700)}
 
 /* nav */
@@ -98,6 +111,145 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .badges{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
 .badges li{padding:6px 12px;border-radius:999px;background:var(--brand-100);color:var(--brand-600);font-size:13px;font-weight:600}
 @media (max-width:900px){.hero .wrap{grid-template-columns:1fr}.card.shift{margin-inline-start:0}.hero{padding-block:44px}}
+
+/* hero motion */
+.phone{position:relative;width:100%;max-width:340px;margin-inline:auto;border-radius:26px;overflow:hidden;box-shadow:0 30px 60px rgba(20,48,58,.18);border:6px solid #14303A;background:#F6F3EC}
+.phone .mo-stage{border-radius:0!important;box-shadow:none!important}
+@media (max-width:900px){.phone{max-width:300px}}
+
+#thiqaMotion{--sand:#F6F3EC;--teal:#0F5C6E;--teal-2:#1F7F93;--teal-deep:#0B4553;--gold:#D9A441;--gold-2:#C08E2E;--gold-soft:#F3E4C0;--ink:#14303A;--ink-2:#4A6570;--mist:#CFE3E8;--line:#E3DED2;--display:"Tajawal","IBM Plex Sans Arabic",system-ui,sans-serif;--body:"IBM Plex Sans Arabic","Tajawal",system-ui,sans-serif;font-family:var(--body);direction:rtl;color:var(--ink);line-height:normal;font-size:14px}
+#thiqaMotion *{box-sizing:content-box}
+#thiqaMotion h1,#thiqaMotion h2,#thiqaMotion h3{text-wrap:initial;line-height:1.2}
+#thiqaMotion p{margin:0}
+#thiqaMotion .mo-wrap{position:absolute;top:0;left:0;width:360px;height:640px;transform-origin:top left}
+
+/* Layout: one continuous 33s GSAP timeline on a fixed 360×640 stage (9:16), a living ribbon that morphs between
+   scenes instead of cutting, and a scrub bar beneath for review. */
+
+#thiqaMotion .mo-wrap{position:relative;width:360px;height:640px;transform-origin:top center;flex:none}
+#thiqaMotion .mo-stage{position:absolute;inset:0;overflow:hidden;border-radius:22px;background:var(--sand);box-shadow:0 30px 60px rgba(20,48,58,.18);isolation:isolate}
+#thiqaMotion .mo-pattern{position:absolute;inset:-40px;z-index:0;opacity:.9;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.mo-w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120' fill='none' stroke='%2314303A' stroke-opacity='.055' stroke-width='1'><path d='M60 6 L72 48 L114 60 L72 72 L60 114 L48 72 L6 60 L48 48 Z'/><path d='M60 22 L68 52 L98 60 L68 68 L60 98 L52 68 L22 60 L52 52 Z'/><circle cx='60' cy='60' r='9'/><path d='M0 0 L120 0 L120 120 L0 120 Z'/></svg>");
+  background-size:120px 120px}
+#thiqaMotion .mo-light{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 70% 45% at 50% 38%, rgba(255,255,255,.95), rgba(255,255,255,0) 100%)}
+#thiqaMotion .mo-vignette{position:absolute;inset:0;z-index:4;pointer-events:none;background:radial-gradient(ellipse 110% 100% at 50% 50%, rgba(246,243,236,0) 60%, rgba(214,205,186,.55) 100%)}
+#thiqaMotion canvas.mo-dust{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+#thiqaMotion svg.mo-ribbon{position:absolute;inset:0;width:100%;height:100%;z-index:2;overflow:visible}
+#thiqaMotion svg.mo-ribbon path{fill:none;stroke-linecap:round;stroke-linejoin:round}
+#thiqaMotion .mo-layer{position:absolute;inset:0;z-index:3}
+#thiqaMotion .mo-sc{position:absolute;inset:0;visibility:hidden}
+#thiqaMotion .mo-col{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;text-align:center}
+
+/* intro dots */
+#thiqaMotion .mo-ddot{position:absolute;border-radius:50%;background:var(--teal)}
+#thiqaMotion .mo-ddot.mo-g{background:var(--gold)}
+
+/* logo */
+#thiqaMotion #mo-logo .mo-col{top:150px;gap:4px}
+#thiqaMotion #mo-logo .mo-mark{width:160px;height:160px;overflow:visible}
+#thiqaMotion #mo-logo .mo-halo{position:absolute;top:120px;left:40px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(217,164,65,.30),rgba(217,164,65,0) 62%)}
+#thiqaMotion #mo-logo .mo-orbit{position:absolute;top:140px;left:60px;width:240px;height:240px;border-radius:50%;border:1px dashed rgba(217,164,65,.55)}
+#thiqaMotion .mo-word{font-family:var(--display);font-weight:800;font-size:64px;line-height:1.1;color:var(--teal);direction:rtl;padding:0 10px;text-shadow:0 0 18px rgba(255,255,255,.95),0 0 36px rgba(255,255,255,.9)}
+#thiqaMotion .mo-lat{font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:6px;color:var(--gold-2);direction:ltr}
+#thiqaMotion .mo-tagline{font-size:15px;font-weight:500;color:var(--ink-2)}
+
+/* slogan */
+#thiqaMotion #mo-slogan .mo-col{top:190px;gap:0}
+#thiqaMotion #mo-slogan .mo-kicker{font-size:13px;font-weight:600;color:var(--gold-2);letter-spacing:.5px;margin-bottom:14px}
+#thiqaMotion #mo-slogan h1{margin:0;font-family:var(--display);font-weight:800;font-size:46px;line-height:1.2;color:var(--ink)}
+#thiqaMotion #mo-slogan h1 em{font-style:normal;color:var(--teal);position:relative;display:inline-block}
+#thiqaMotion #mo-slogan .mo-under{position:absolute;right:0;left:0;bottom:2px;height:3px;background:var(--gold);transform-origin:right;border-radius:2px}
+#thiqaMotion #mo-slogan .mo-lead{margin-top:16px;font-size:14px;line-height:1.8;color:var(--ink-2);max-width:270px}
+
+/* services */
+#thiqaMotion .mo-svc{position:absolute;inset:0}
+#thiqaMotion .mo-svc .mo-col{top:160px;gap:10px}
+#thiqaMotion .mo-svc .mo-ico{width:124px;height:124px;display:grid;place-items:center}
+#thiqaMotion .mo-svc .mo-ico svg{width:100%;height:100%;overflow:visible;fill:none;stroke:var(--teal);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#thiqaMotion .mo-svc .mo-ico .mo-gd{stroke:var(--gold)}
+#thiqaMotion .mo-svc .mo-ico .mo-fg{fill:var(--gold);stroke:none}
+#thiqaMotion .mo-svc .mo-ico .mo-fm{fill:var(--mist);stroke:none}
+#thiqaMotion .mo-svc h2{margin:0;font-family:var(--display);font-weight:800;font-size:32px;color:var(--ink);line-height:1.2}
+#thiqaMotion .mo-svc p{margin:0;font-size:13.5px;line-height:1.8;color:var(--ink-2);max-width:260px}
+#thiqaMotion .mo-svc .mo-for{font-size:12px;font-weight:600;color:var(--teal);background:var(--mist);padding:5px 12px;border-radius:999px}
+#thiqaMotion .mo-svc .mo-idx{position:absolute;top:36px;right:30px;font-family:var(--display);font-weight:800;font-size:15px;color:var(--gold-2);direction:ltr;letter-spacing:1px}
+#thiqaMotion .mo-svc .mo-idx small{font-weight:500;font-size:11px;color:var(--ink-2);margin-left:6px;letter-spacing:0}
+#thiqaMotion #mo-svcHead{position:absolute;top:70px;left:0;right:0;text-align:center;font-size:13px;font-weight:600;color:var(--ink-2)}
+#thiqaMotion #mo-svcHead b{color:var(--teal)}
+#thiqaMotion .mo-steps{position:absolute;bottom:120px;left:0;right:0;display:flex;justify-content:center;gap:8px}
+#thiqaMotion .mo-steps i{width:8px;height:8px;border-radius:50%;background:var(--line);border:1px solid var(--line);transition:background .4s}
+#thiqaMotion .mo-steps i.mo-on{background:var(--gold);border-color:var(--gold)}
+
+/* ready-made services */
+#thiqaMotion #mo-ready .mo-col{top:92px;gap:0}
+#thiqaMotion #mo-ready .mo-kicker{font-size:13px;font-weight:600;color:var(--gold-2);margin-bottom:8px}
+#thiqaMotion #mo-ready h2{margin:0 0 20px;font-family:var(--display);font-weight:800;font-size:27px;color:var(--ink)}
+#thiqaMotion #mo-ready .mo-rgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:306px}
+#thiqaMotion #mo-ready .mo-rt{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 10px 10px;display:flex;flex-direction:column;align-items:center;gap:5px;box-shadow:0 8px 20px rgba(20,48,58,.06);text-align:center}
+#thiqaMotion #mo-ready .mo-ri{width:40px;height:40px;border-radius:11px;background:var(--mist);display:grid;place-items:center}
+#thiqaMotion #mo-ready .mo-ri svg{width:20px;height:20px;fill:none;stroke:var(--teal);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#thiqaMotion #mo-ready .mo-rt b{font-family:var(--display);font-weight:700;font-size:14.5px;color:var(--ink);line-height:1.3}
+#thiqaMotion #mo-ready .mo-rt small{font-size:11px;color:var(--teal);font-weight:600}
+#thiqaMotion #mo-ready .mo-rt.mo-soon{border-style:dashed}
+#thiqaMotion #mo-ready .mo-rt .mo-tag{background:var(--gold-soft);color:#14303A;padding:1px 9px;border-radius:999px}
+#thiqaMotion #mo-ready .mo-note{margin-top:16px;font-size:12px;color:var(--ink-2)}
+
+/* stats */
+#thiqaMotion #mo-stats .mo-col{top:110px;gap:0}
+#thiqaMotion #mo-stats .mo-kicker{font-size:13px;font-weight:600;color:var(--gold-2)}
+#thiqaMotion #mo-stats .mo-big{font-family:var(--display);font-weight:800;font-size:92px;line-height:1;color:var(--teal);direction:ltr;font-variant-numeric:tabular-nums;margin-top:6px}
+#thiqaMotion #mo-stats .mo-big-l{font-family:var(--display);font-weight:700;font-size:22px;color:var(--ink);margin-top:-2px}
+#thiqaMotion #mo-stats .mo-row{display:flex;gap:14px;margin-top:34px}
+#thiqaMotion #mo-stats .mo-tile{width:140px;padding:14px 10px;border-radius:16px;background:#fff;border:1px solid var(--line);box-shadow:0 10px 26px rgba(20,48,58,.07)}
+#thiqaMotion #mo-stats .mo-tile b{display:block;font-family:var(--display);font-weight:800;font-size:30px;color:var(--teal);direction:ltr;font-variant-numeric:tabular-nums;line-height:1}
+#thiqaMotion #mo-stats .mo-tile b i{font-style:normal;color:var(--gold)}
+#thiqaMotion #mo-stats .mo-tile b u{text-decoration:none}
+#thiqaMotion #mo-stats .mo-tile span{display:block;font-size:11.5px;color:var(--ink-2);margin-top:6px;line-height:1.5}
+#thiqaMotion #mo-stats .mo-arc{position:absolute;top:60px;left:30px;width:300px;height:300px;border-radius:50%;border:1.5px solid var(--teal);border-right-color:transparent;border-bottom-color:transparent}
+#thiqaMotion #mo-stats .mo-arc2{position:absolute;top:80px;left:50px;width:260px;height:260px;border-radius:50%;border:1px solid var(--gold);border-left-color:transparent;border-top-color:transparent}
+
+/* seal */
+#thiqaMotion #mo-seal .mo-col{top:95px;gap:14px}
+#thiqaMotion #mo-seal .mo-seal{width:230px;height:230px;position:relative}
+#thiqaMotion #mo-seal .mo-seal svg{width:100%;height:100%;overflow:visible}
+#thiqaMotion #mo-seal .mo-outer{fill:none;stroke:var(--gold);stroke-width:1.2}
+#thiqaMotion #mo-seal .mo-mid{fill:none;stroke:var(--gold);stroke-width:5;stroke-dasharray:2 3;opacity:.7}
+#thiqaMotion #mo-seal .mo-inner{fill:#fff;stroke:var(--gold);stroke-width:1}
+#thiqaMotion #mo-seal .mo-ar{font-family:var(--display);font-weight:700;font-size:9.5px;fill:var(--gold-2);letter-spacing:1px}
+#thiqaMotion #mo-seal .mo-t{font-family:var(--display);font-weight:800;fill:var(--teal)}
+#thiqaMotion #mo-seal .mo-shine{position:absolute;top:0;bottom:0;left:0;width:70px;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.85),rgba(255,255,255,0));transform:translateX(-120px) rotate(14deg)}
+#thiqaMotion #mo-seal h3{margin:0;font-family:var(--display);font-weight:800;font-size:26px;color:var(--teal)}
+#thiqaMotion #mo-seal .mo-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;max-width:300px}
+#thiqaMotion #mo-seal .mo-chip{font-size:12px;font-weight:600;color:var(--ink);background:#fff;border:1px solid var(--line);padding:7px 12px;border-radius:999px;display:flex;align-items:center;gap:6px;box-shadow:0 6px 16px rgba(20,48,58,.06)}
+#thiqaMotion #mo-seal .mo-chip::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold)}
+#thiqaMotion .mo-spark{position:absolute;color:var(--gold);font-size:14px;line-height:1}
+
+/* offer */
+#thiqaMotion #mo-offer .mo-col{top:150px;gap:0}
+#thiqaMotion #mo-offer .mo-kicker{font-size:13px;font-weight:600;color:var(--gold-2);margin-bottom:10px}
+#thiqaMotion #mo-offer h2{margin:0 0 26px;font-family:var(--display);font-weight:800;font-size:30px;color:var(--ink)}
+#thiqaMotion #mo-offer .mo-list{display:flex;flex-direction:column;gap:14px;width:290px}
+#thiqaMotion #mo-offer .mo-it{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;text-align:right;box-shadow:0 8px 20px rgba(20,48,58,.06)}
+#thiqaMotion #mo-offer .mo-ck{flex:none;width:30px;height:30px;border-radius:50%;background:var(--gold-soft);display:grid;place-items:center}
+#thiqaMotion #mo-offer .mo-ck svg{width:16px;height:16px;fill:none;stroke:var(--teal);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+#thiqaMotion #mo-offer .mo-it b{display:block;font-family:var(--display);font-weight:700;font-size:17px;color:var(--ink);line-height:1.3}
+#thiqaMotion #mo-offer .mo-it small{display:block;font-size:12px;color:var(--ink-2)}
+#thiqaMotion #mo-offer .mo-it b i{font-style:normal;color:var(--teal)}
+
+/* end */
+#thiqaMotion #mo-end .mo-col{top:130px;gap:4px}
+#thiqaMotion #mo-end .mo-mark{width:118px;height:118px}
+#thiqaMotion #mo-end .mo-word{font-size:52px}
+#thiqaMotion #mo-end .mo-cta{margin-top:18px;font-weight:600;font-size:15px;color:#14303A;background:var(--gold);padding:14px 30px;border-radius:12px;box-shadow:0 12px 26px rgba(217,164,65,.35);display:flex;gap:8px;align-items:center}
+#thiqaMotion #mo-end .mo-cta svg{width:16px;height:16px;fill:none;stroke:#14303A;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+#thiqaMotion #mo-end .mo-stem{width:1px;height:62px;background:var(--gold);transform-origin:top;position:relative;margin-top:6px}
+#thiqaMotion #mo-end .mo-stem::after{content:"";position:absolute;bottom:-3px;left:-3px;width:7px;height:7px;border-radius:50%;background:var(--gold)}
+#thiqaMotion #mo-end .mo-contact{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-2);margin-top:10px}
+#thiqaMotion #mo-end .mo-contact svg{width:18px;height:18px;fill:#1E8E5A}
+#thiqaMotion #mo-end .mo-contact b{direction:ltr;unicode-bidi:isolate;font-weight:600;color:var(--ink);font-size:16px;font-variant-numeric:tabular-nums}
+#thiqaMotion #mo-end .mo-hours{font-size:11.5px;color:var(--ink-2)}
+#thiqaMotion #mo-end .mo-foot{position:absolute;bottom:28px;left:0;right:0;text-align:center;font-family:var(--display);font-weight:700;font-size:12px;color:var(--gold-2);letter-spacing:.5px}
+
 
 /* sections */
 section{padding-block:80px}
@@ -180,6 +332,39 @@ section{padding-block:80px}
 .creds{margin:18px 0 0;padding:0;list-style:none;display:grid;gap:10px}
 .creds li{position:relative;padding-inline-start:26px;font-size:14px;color:var(--ink-900)}
 .creds li::before{content:"";position:absolute;inset-inline-start:0;top:9px;width:12px;height:12px;border-radius:50%;background:var(--accent-500)}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.chip{height:38px;padding:0 16px;border-radius:999px;border:1.5px solid var(--border-200);background:var(--surface-100);color:var(--ink-900);font:600 14px var(--body);cursor:pointer}
+.chip:hover{border-color:var(--brand-600);color:var(--brand-600)}
+.chip.active{background:var(--brand-600);border-color:var(--brand-600);color:var(--ink-on-brand)}
+.works{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+@media (max-width:1000px){.works{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.works{grid-template-columns:1fr}}
+.work{background:var(--surface-100);border:1px solid var(--border-200);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.work[hidden]{display:none}
+.thumb{position:relative;display:block;aspect-ratio:4/3;max-width:100%;background:var(--brand-100);padding:22px 48px 0;overflow:hidden;text-decoration:none}
+.thumb-portfolio{background:var(--accent-100)}
+.thumb-kit{background:#DCE8DF}
+.thumb-paper{background:#E6E3F0}
+.thumb-design{background:var(--surface-900)}
+.page{height:100%;background:#fff;border-radius:8px 8px 0 0;padding:16px 18px;display:flex;flex-direction:column;gap:8px;box-shadow:0 -4px 20px rgba(20,48,58,.12);transition:transform .25s}
+.thumb:hover .page{transform:translateY(-6px)}
+.pg-head{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.pg-dot{width:16px;height:16px;border-radius:4px;background:var(--brand-600)}
+.pg-title{display:block;height:12px;width:65%;border-radius:4px;background:#14303A}
+.pg-line{display:block;height:6px;border-radius:3px;background:#D8D3C7}
+.w40{width:40%}.w50{width:50%}.w60{width:60%}.w70{width:70%}.w80{width:80%}.w90{width:90%}
+.pg-block{height:44px;border-radius:6px;background:var(--brand-100);border:1px solid #CFE3E8;margin:4px 0}
+.thumb-portfolio .pg-dot{background:var(--accent-600)}.thumb-portfolio .pg-block{background:var(--accent-100)}
+.thumb-kit .pg-dot{background:#2E8B57}.thumb-kit .pg-block{background:#E4F0E7}
+.thumb-paper .pg-dot{background:#5B4E9E}.thumb-paper .pg-block{background:#EEEBF7}
+.thumb-design .pg-dot{background:var(--accent-500)}
+.wm{position:absolute;top:12px;inset-inline-start:12px;padding:4px 10px;border-radius:999px;background:rgba(20,48,58,.75);color:#fff;font:600 11px/1.6 var(--body)}
+.work-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:6px;flex-grow:1}
+.work-body .cat{font-size:12px;font-weight:600;color:var(--brand-600)}
+.work-body h3{font-size:18px}
+.work-body p{font-size:13.5px;color:var(--ink-600);flex-grow:1}
+.work-body .more{font:600 14px var(--body);color:var(--brand-600);text-decoration:none;margin-top:6px}
+.work-body .more:hover{text-decoration:underline}
 /* booking */
 .book{display:grid;grid-template-columns:1fr;gap:24px}
 form{background:var(--surface-100);border:1px solid var(--border-200);border-radius:20px;padding:32px;display:grid;gap:16px}
@@ -225,6 +410,7 @@ footer .copy-line{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.12);pa
     <nav class="links" id="links" aria-label="الرئيسية">
       <a href="#services">خدماتنا</a>
       <a href="#consult">الاستشارات</a>
+      <a href="#works">أعمالنا</a>
       <a href="#why">لماذا ثقة</a>
       <a href="#about">عن ثقة</a>
       <a href="#features">مميزاتنا</a>
@@ -248,6 +434,10 @@ footer .copy-line{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.12);pa
       <div class="actions">
         <a class="btn btn-primary" href="#contact">احجز استشارتك المجانية</a>
         <a class="btn btn-secondary" href="#services">استكشف خدماتنا</a>
+        <a class="btn btn-ghost" href="#works">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg>
+          شاهد نماذج أعمالنا
+        </a>
       </div>
       <div class="stats" aria-label="أرقام ثقة">
         <div class="stat"><b>24</b><span>سنة في قطاع التعليم</span></div>
@@ -255,23 +445,190 @@ footer .copy-line{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.12);pa
         <div class="stat"><b>+1000</b><span>متدرب ومتدربة</span></div>
       </div>
     </div>
-    <div class="cards">
-      <div class="card">
-        <h3><i class="dot"></i>ماذا تستلم بعد الاستشارة؟</h3>
-        <ul class="deliver">
-          <li><span class="ck">✓</span><div><b>تقرير مكتوب</b><small>التشخيص، الأهداف، والخطوات خلال 3 أيام عمل</small></div></li>
-          <li><span class="ck">✓</span><div><b>خطة عمل واضحة</b><small>مهام محددة بمسؤول وموعد ومؤشر نجاح</small></div></li>
-          <li><span class="ck">✓</span><div><b>متابعة 30 يوماً</b><small>قناة واتساب مباشرة أثناء التطبيق</small></div></li>
-        </ul>
+    <div class="phone" id="thiqaPhone" aria-label="مقطع تعريفي متحرك عن ثقة" role="img">
+      <div id="thiqaMotion">
+<div class="mo-wrap" id="mo-wrap">
+<div class="mo-stage" id="mo-stage">
+  <div class="mo-pattern" id="mo-pattern"></div>
+  <div class="mo-light" id="mo-light"></div>
+  <canvas class="mo-dust" id="mo-dust" width="360" height="640"></canvas>
+
+  <svg class="mo-ribbon" viewBox="0 0 360 640" aria-hidden="true">
+    <path id="mo-rbF" stroke="#1F7F93" stroke-width="1" opacity=".5" pathLength="1"/>
+    <path id="mo-rbT" stroke="#0F5C6E" stroke-width="5" pathLength="1"/>
+    <path id="mo-rbG" stroke="#D9A441" stroke-width="2" pathLength="1"/>
+  </svg>
+
+  <div class="mo-layer">
+    <!-- intro -->
+    <div class="mo-sc" id="mo-intro">
+      <span class="mo-ddot" style="width:8px;height:8px;top:306px;left:64px"></span>
+      <span class="mo-ddot mo-g" style="width:6px;height:6px;top:352px;left:142px"></span>
+      <span class="mo-ddot" style="width:5px;height:5px;top:290px;left:226px"></span>
+      <span class="mo-ddot mo-g" style="width:10px;height:10px;top:330px;left:296px"></span>
+      <span class="mo-ddot" style="width:4px;height:4px;top:380px;left:200px"></span>
+    </div>
+
+    <!-- logo -->
+    <div class="mo-sc" id="mo-logo">
+      <div class="mo-halo"></div><div class="mo-orbit"></div>
+      <div class="mo-col">
+        <svg class="mo-mark" viewBox="0 0 64 64">
+          <path id="mo-shield" pathLength="1" d="M32 6 L54 14 V32 C54 45 44 54 32 59 C20 54 10 45 10 32 V14 Z" fill="#0F5C6E" fill-opacity="0" stroke="#0F5C6E" stroke-width="1.5"/>
+          <path id="mo-check" pathLength="1" d="M21 33 L29 41 L44 24" stroke="#fff" stroke-width="5.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle class="mo-dot" cx="22" cy="20" r="3" fill="#D9A441"/><circle class="mo-dot" cx="32" cy="16" r="3.4" fill="#D9A441"/><circle class="mo-dot" cx="42" cy="12" r="3.8" fill="#D9A441"/>
+        </svg>
+        <div class="mo-word" id="mo-wordA">ثقة</div>
+        <div class="mo-lat" id="mo-latA">THIQA</div>
+        <div class="mo-tagline" id="mo-tagA">للاستشارات التعليمية والتربوية</div>
       </div>
-      <div class="card shift">
-        <h3><i class="dot blue"></i>مرخّص ومعتمد</h3>
-        <ul class="badges">
-          <li>ترخيص وزارة التجارة · فئة خبير</li>
-          <li>أخصائي تقويم مدرسي معتمد</li>
-          <li>خبير تطوير مهني · المعهد الوطني</li>
-          <li>مستشار معتمد PQASSO</li>
-        </ul>
+    </div>
+
+    <!-- slogan -->
+    <div class="mo-sc" id="mo-slogan">
+      <div class="mo-col">
+        <div class="mo-kicker">✦ ثقة للاستشارات التعليمية والتربوية</div>
+        <h1><span class="mo-w1">خطة</span> <em class="mo-w2">تثق بها<span class="mo-under"></span></em>،<br><span class="mo-w3">وأثر</span> <em class="mo-w4">تراه<span class="mo-under"></span></em></h1>
+        <p class="mo-lead">نبني لك ما تحتاجه: أوراق عمل، حقائب تدريبية، ملفات إنجاز، واستشارات متخصصة.</p>
+      </div>
+    </div>
+
+    <!-- services -->
+    <div class="mo-sc" id="mo-services">
+      <div id="mo-svcHead"><b>أربع</b> خدمات استشارية</div>
+      <div class="mo-svc" id="mo-sv1">
+        <div class="mo-idx">01<small>/04</small></div>
+        <div class="mo-col">
+          <div class="mo-ico"><svg viewBox="0 0 64 64"><circle class="mo-fm" cx="32" cy="34" r="22"/><path d="M58 24L32 12 6 24l26 12 26-12z"/><path class="mo-gd" d="M16 30v12c5 5 27 5 32 0V30"/><path d="M58 24v14"/><circle class="mo-fg" cx="58" cy="40" r="2.6"/></svg></div>
+          <h2>الإرشاد الأكاديمي</h2>
+          <p>اختيار التخصص المناسب، بناء خطة الدراسة، والاستعداد للقدرات والتحصيلي.</p>
+          <span class="mo-for">لطلاب الثانوية والجامعة</span>
+        </div>
+      </div>
+      <div class="mo-svc" id="mo-sv2">
+        <div class="mo-idx">02<small>/04</small></div>
+        <div class="mo-col">
+          <div class="mo-ico"><svg viewBox="0 0 64 64"><circle class="mo-fm" cx="32" cy="34" r="22"/><circle cx="24" cy="22" r="7"/><path d="M8 50a16 16 0 0 1 32 0"/><circle class="mo-gd" cx="44" cy="26" r="5.5"/><path class="mo-gd" d="M38 50a12 12 0 0 1 20 0"/><circle class="mo-fg" cx="54" cy="14" r="2.6"/></svg></div>
+          <h2>التطوير المهني</h2>
+          <p>ورش تطبيقية في طرق التدريس وإدارة الصف والتقويم، وخطة تطوير سنوية تُقاس بأثرها.</p>
+          <span class="mo-for">للمعلمين وقادة المدارس</span>
+        </div>
+      </div>
+      <div class="mo-svc" id="mo-sv3">
+        <div class="mo-idx">03<small>/04</small></div>
+        <div class="mo-col">
+          <div class="mo-ico"><svg viewBox="0 0 64 64"><circle class="mo-fm" cx="32" cy="34" r="22"/><path d="M8 54V26l24-14 24 14v28"/><path d="M8 54h48"/><path class="mo-gd" d="M26 54V40h12v14"/><path d="M18 36h6M40 36h6"/><circle class="mo-fg" cx="32" cy="24" r="2.6"/></svg></div>
+          <h2>الاستشارات المدرسية</h2>
+          <p>تهيئة المدرسة للتقويم الذاتي والخارجي، ومؤشرات الأداء، وخطط التحسين المبنية على النتائج.</p>
+          <span class="mo-for">للمدارس الأهلية والعالمية</span>
+        </div>
+      </div>
+      <div class="mo-svc" id="mo-sv4">
+        <div class="mo-idx">04<small>/04</small></div>
+        <div class="mo-col">
+          <div class="mo-ico"><svg viewBox="0 0 64 64"><circle class="mo-fm" cx="32" cy="34" r="22"/><path d="M10 54h44"/><path d="M16 54V34M28 54V20M40 54V40M52 54V28"/><path class="mo-gd" d="M12 30 L28 14 L40 32 L54 20"/><circle class="mo-fg" cx="54" cy="20" r="2.8"/></svg></div>
+          <h2>الاستشارات البحثية</h2>
+          <p>دعم رسائل الماجستير والدكتوراه من تصميم الأدوات إلى التحليل الإحصائي ومراجعة الفصول.</p>
+          <span class="mo-for">لطلاب الدراسات العليا</span>
+        </div>
+      </div>
+      <div class="mo-steps" id="mo-steps"><i></i><i></i><i></i><i></i></div>
+    </div>
+
+    <!-- ready-made services -->
+    <div class="mo-sc" id="mo-ready">
+      <div class="mo-col">
+        <div class="mo-kicker">خدمات جاهزة بطلب مباشر</div>
+        <h2>تحتاج ملفاً جاهزاً؟ نعدّه لك</h2>
+        <div class="mo-rgrid">
+          <div class="mo-rt"><span class="mo-ri"><svg viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M9 13h6M9 17h6"/></svg></span><b>ملف الإنجاز المهني</b><small>3 أيام عمل</small></div>
+          <div class="mo-rt"><span class="mo-ri"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18"/></svg></span><b>ملفك المهني للتوظيف</b><small>3 أيام عمل</small></div>
+          <div class="mo-rt"><span class="mo-ri"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 15l3-3 3 2 4-5"/></svg></span><b>التقارير المدرسية</b><small>3 أيام عمل</small></div>
+          <div class="mo-rt"><span class="mo-ri"><svg viewBox="0 0 24 24"><path d="M4 4h12l4 4v12H4z"/><path d="M8 12h8M8 16h5"/></svg></span><b>أوراق العمل والملخصات</b><small>3 أيام عمل</small></div>
+          <div class="mo-rt"><span class="mo-ri"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/><circle cx="19" cy="18" r="2"/></svg></span><b>الحقائب التدريبية</b><small>7 أيام عمل</small></div>
+          <div class="mo-rt mo-soon"><span class="mo-ri"><svg viewBox="0 0 24 24"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span><b>ورش تدريبية جاهزة</b><small class="mo-tag">قريباً</small></div>
+        </div>
+        <div class="mo-note">إعداد وتصميم بتسليم محدد، دون جلسة تشخيص</div>
+      </div>
+    </div>
+
+    <!-- stats -->
+    <div class="mo-sc" id="mo-stats">
+      <div class="mo-arc"></div><div class="mo-arc2"></div>
+      <div class="mo-col">
+        <div class="mo-kicker">خبرة تصنع ما تحتاجه</div>
+        <div class="mo-big" id="mo-n24">0</div>
+        <div class="mo-big-l">سنة في قطاع التعليم</div>
+        <div class="mo-row">
+          <div class="mo-tile"><b><i>+</i><u id="mo-n1000a">0</u></b><span>ساعة تدريب موثّقة<br>في 54 برنامجاً</span></div>
+          <div class="mo-tile"><b><i>+</i><u id="mo-n1000b">0</u></b><span>متدرب ومتدربة<br>من المعلمين والقيادات</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- seal -->
+    <div class="mo-sc" id="mo-seal">
+      <span class="mo-spark" style="top:120px;left:48px">✦</span>
+      <span class="mo-spark" style="top:95px;right:60px;font-size:10px">✦</span>
+      <span class="mo-spark" style="top:330px;left:70px;font-size:9px">✦</span>
+      <span class="mo-spark" style="top:300px;right:46px">✦</span>
+      <div class="mo-col">
+        <div class="mo-seal">
+          <svg viewBox="0 0 200 200">
+            <defs><path id="mo-arc" d="M100 100 m-79 0 a79 79 0 1 1 158 0 a79 79 0 1 1 -158 0"/></defs>
+            <circle class="mo-outer" cx="100" cy="100" r="97"/>
+            <circle class="mo-mid" cx="100" cy="100" r="89"/>
+            <circle class="mo-inner" cx="100" cy="100" r="71"/>
+            <g id="mo-sealText"><text class="mo-ar" dy="-3"><textPath href="#mo-arc" startOffset="0">مرخّص · معتمد · ثقة للاستشارات التعليمية والتربوية · مرخّص · معتمد ·</textPath></text></g>
+            <g transform="translate(78 48) scale(.7)"><path d="M32 6 L54 14 V32 C54 45 44 54 32 59 C20 54 10 45 10 32 V14 Z" fill="#0F5C6E"/><path d="M21 33 L29 41 L44 24" stroke="#fff" stroke-width="5.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="22" cy="20" r="3" fill="#D9A441"/><circle cx="32" cy="16" r="3.4" fill="#D9A441"/><circle cx="42" cy="12" r="3.8" fill="#D9A441"/></g>
+            <text class="mo-t" x="100" y="124" text-anchor="middle" font-size="19">فئة خبير</text>
+            <text x="100" y="146" text-anchor="middle" font-size="10.5" style="fill:#4A6570;font-family:var(--body);font-weight:500">ترخيص وزارة التجارة</text>
+          </svg>
+          <div class="mo-shine"></div>
+        </div>
+        <h3>مرخّص ومعتمد</h3>
+        <div class="mo-chips">
+          <span class="mo-chip">أخصائي تقويم مدرسي معتمد</span>
+          <span class="mo-chip">خبير تطوير مهني · المعهد الوطني</span>
+          <span class="mo-chip">مستشار معتمد PQASSO</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- offer -->
+    <div class="mo-sc" id="mo-offer">
+      <div class="mo-col">
+        <div class="mo-kicker">ما الذي تحصل عليه فعلاً</div>
+        <h2>كل استشارة تنتهي بخطة</h2>
+        <div class="mo-list">
+          <div class="mo-it"><span class="mo-ck"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></span><div><b>استشارة أولى مجانية <i>20 دقيقة</i></b><small>نحدد الاحتياج قبل أي التزام</small></div></div>
+          <div class="mo-it"><span class="mo-ck"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></span><div><b>تقرير مكتوب خلال <i>3 أيام</i></b><small>التشخيص والأهداف والخطوات</small></div></div>
+          <div class="mo-it"><span class="mo-ck"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></span><div><b>متابعة <i>30 يوماً</i> بعد الاستشارة</b><small>قناة واتساب مباشرة أثناء التطبيق</small></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end -->
+    <div class="mo-sc" id="mo-end">
+      <div class="mo-col">
+        <svg class="mo-mark" id="mo-markEnd" viewBox="0 0 64 64"><path d="M32 6 L54 14 V32 C54 45 44 54 32 59 C20 54 10 45 10 32 V14 Z" fill="#0F5C6E"/><path d="M21 33 L29 41 L44 24" stroke="#fff" stroke-width="5.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="22" cy="20" r="3" fill="#D9A441"/><circle cx="32" cy="16" r="3.4" fill="#D9A441"/><circle cx="42" cy="12" r="3.8" fill="#D9A441"/></svg>
+        <div class="mo-word" id="mo-wordE">ثقة</div>
+        <div class="mo-tagline" id="mo-tagE">للاستشارات التعليمية والتربوية</div>
+        <div class="mo-cta" id="mo-cta">احجز استشارتك المجانية<svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></div>
+        <div class="mo-stem" id="mo-stem"></div>
+        <div class="mo-contact" id="mo-contact">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.1.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3z"/></svg>
+          <b>0531531267</b>
+        </div>
+        <div class="mo-hours" id="mo-hours">نرد يومياً من 9 صباحاً إلى 9 مساءً</div>
+      </div>
+      <div class="mo-foot" id="mo-footE">خطة تثق بها · وأثر تراه</div>
+    </div>
+  </div>
+  <div class="mo-vignette"></div>
+  </div>
+</div>
+
       </div>
     </div>
   </div>
@@ -344,6 +701,135 @@ footer .copy-line{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.12);pa
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<section id="works">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">نماذج من أعمالنا</span>
+      <h2>اطّلع على نماذج حقيقية قبل أن تطلب</h2>
+      <p>نماذج معدّلة البيانات حفاظاً على سرية عملائنا. كل نموذج يُفتح كاملاً للتصفح.</p>
+    </div>
+    <div class="filters" role="tablist" aria-label="تصفية الأعمال">
+      <button class="chip active" type="button" data-f="الكل">الكل</button>
+      <button class="chip" type="button" data-f="تقارير">تقارير مدرسية</button>
+      <button class="chip" type="button" data-f="ملفات إنجاز">ملفات إنجاز</button>
+      <button class="chip" type="button" data-f="حقائب تدريبية">حقائب تدريبية</button>
+      <button class="chip" type="button" data-f="أوراق عمل">أوراق عمل</button>
+      <button class="chip" type="button" data-f="تصاميم">تصاميم</button>
+    </div>
+    <div class="works" id="worksGrid">
+        <article class="work" data-cat="تقارير">
+          <a class="thumb thumb-report" href="#works" aria-label="تصفح نموذج: تقرير الأداء المدرسي السنوي">
+            <div class="page">
+              <div class="pg-head"><span class="pg-dot"></span><span class="pg-line w40"></span></div>
+              <span class="pg-title"></span>
+              <span class="pg-line w90"></span><span class="pg-line w80"></span><span class="pg-line w60"></span>
+              <div class="pg-block"></div>
+              <span class="pg-line w70"></span><span class="pg-line w50"></span>
+            </div>
+            <span class="wm">نموذج توضيحي</span>
+          </a>
+          <div class="work-body">
+            <span class="cat">تقارير</span>
+            <h3>تقرير الأداء المدرسي السنوي</h3>
+            <p>تقرير أداء مدرسة أهلية: مؤشرات، تحليل نتائج، وخطة تحسين</p>
+            <a class="more" href="#works">تصفح النموذج ←</a>
+          </div>
+        </article>
+        <article class="work" data-cat="ملفات إنجاز">
+          <a class="thumb thumb-portfolio" href="#works" aria-label="تصفح نموذج: ملف إنجاز معلم للرخصة المهنية">
+            <div class="page">
+              <div class="pg-head"><span class="pg-dot"></span><span class="pg-line w40"></span></div>
+              <span class="pg-title"></span>
+              <span class="pg-line w90"></span><span class="pg-line w80"></span><span class="pg-line w60"></span>
+              <div class="pg-block"></div>
+              <span class="pg-line w70"></span><span class="pg-line w50"></span>
+            </div>
+            <span class="wm">نموذج توضيحي</span>
+          </a>
+          <div class="work-body">
+            <span class="cat">ملفات إنجاز</span>
+            <h3>ملف إنجاز معلم للرخصة المهنية</h3>
+            <p>ملف إنجاز مهني مرتّب وفق معايير الرخصة المهنية</p>
+            <a class="more" href="#works">تصفح النموذج ←</a>
+          </div>
+        </article>
+        <article class="work" data-cat="حقائب تدريبية">
+          <a class="thumb thumb-kit" href="#works" aria-label="تصفح نموذج: حقيبة "التقويم المتمركز حول المتعلم"">
+            <div class="page">
+              <div class="pg-head"><span class="pg-dot"></span><span class="pg-line w40"></span></div>
+              <span class="pg-title"></span>
+              <span class="pg-line w90"></span><span class="pg-line w80"></span><span class="pg-line w60"></span>
+              <div class="pg-block"></div>
+              <span class="pg-line w70"></span><span class="pg-line w50"></span>
+            </div>
+            <span class="wm">نموذج توضيحي</span>
+          </a>
+          <div class="work-body">
+            <span class="cat">حقائب تدريبية</span>
+            <h3>حقيبة "التقويم المتمركز حول المتعلم"</h3>
+            <p>دليل مدرب ودليل متدرب وعرض تقديمي وأدوات قياس</p>
+            <a class="more" href="#works">تصفح النموذج ←</a>
+          </div>
+        </article>
+        <article class="work" data-cat="أوراق عمل">
+          <a class="thumb thumb-paper" href="#works" aria-label="تصفح نموذج: ورقة عمل لمؤتمر تربوي">
+            <div class="page">
+              <div class="pg-head"><span class="pg-dot"></span><span class="pg-line w40"></span></div>
+              <span class="pg-title"></span>
+              <span class="pg-line w90"></span><span class="pg-line w80"></span><span class="pg-line w60"></span>
+              <div class="pg-block"></div>
+              <span class="pg-line w70"></span><span class="pg-line w50"></span>
+            </div>
+            <span class="wm">نموذج توضيحي</span>
+          </a>
+          <div class="work-body">
+            <span class="cat">أوراق عمل</span>
+            <h3>ورقة عمل لمؤتمر تربوي</h3>
+            <p>ورقة علمية بصيغة المؤتمر مع ملخص عربي وإنجليزي</p>
+            <a class="more" href="#works">تصفح النموذج ←</a>
+          </div>
+        </article>
+        <article class="work" data-cat="تقارير">
+          <a class="thumb thumb-report" href="#works" aria-label="تصفح نموذج: تقرير جودة للاعتماد المدرسي">
+            <div class="page">
+              <div class="pg-head"><span class="pg-dot"></span><span class="pg-line w40"></span></div>
+              <span class="pg-title"></span>
+              <span class="pg-line w90"></span><span class="pg-line w80"></span><span class="pg-line w60"></span>
+              <div class="pg-block"></div>
+              <span class="pg-line w70"></span><span class="pg-line w50"></span>
+            </div>
+            <span class="wm">نموذج توضيحي</span>
+          </a>
+          <div class="work-body">
+            <span class="cat">تقارير</span>
+            <h3>تقرير جودة للاعتماد المدرسي</h3>
+            <p>ملف أدلة وشواهد وتقرير تقويم ذاتي جاهز للاعتماد</p>
+            <a class="more" href="#works">تصفح النموذج ←</a>
+          </div>
+        </article>
+        <article class="work" data-cat="تصاميم">
+          <a class="thumb thumb-design" href="#works" aria-label="تصفح نموذج: هوية بصرية لبرنامج تدريبي">
+            <div class="page">
+              <div class="pg-head"><span class="pg-dot"></span><span class="pg-line w40"></span></div>
+              <span class="pg-title"></span>
+              <span class="pg-line w90"></span><span class="pg-line w80"></span><span class="pg-line w60"></span>
+              <div class="pg-block"></div>
+              <span class="pg-line w70"></span><span class="pg-line w50"></span>
+            </div>
+            <span class="wm">نموذج توضيحي</span>
+          </a>
+          <div class="work-body">
+            <span class="cat">تصاميم</span>
+            <h3>هوية بصرية لبرنامج تدريبي</h3>
+            <p>شعار وقالب شهادة وشرائح وبطاقات تواصل</p>
+            <a class="more" href="#works">تصفح النموذج ←</a>
+          </div>
+        </article>
+    </div>
+    <p class="note">المعروض حالياً مواضع توضيحية؛ تُستبدل بملفات PDF حقيقية بعد إرسالها.</p>
   </div>
 </section>
 
@@ -582,6 +1068,11 @@ footer .copy-line{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.12);pa
 (function(){
   // رابط تطبيق Google Apps Script (الآراء + نسخة الحجوزات)
   var REVIEWS_API='https://script.google.com/macros/s/AKfycbzN-ls75nkyTJyAJpfqkNJ9twKtJhPPCWc4qgU7UXvIxx-SK9y1pcRUCUpyW91idFPy/exec';
+  document.querySelectorAll('.chip').forEach(function(ch){ch.addEventListener('click',function(){
+    document.querySelectorAll('.chip').forEach(function(c){c.classList.remove('active');});ch.classList.add('active');
+    var f=ch.getAttribute('data-f');
+    document.querySelectorAll('#worksGrid .work').forEach(function(w){w.hidden=!(f==='الكل'||w.getAttribute('data-cat')===f);});
+  });});
   var btn=document.getElementById('menuBtn'),links=document.getElementById('links');
   btn.addEventListener('click',function(){var o=links.classList.toggle('open');btn.setAttribute('aria-expanded',o?'true':'false');});
   links.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){links.classList.remove('open');btn.setAttribute('aria-expanded','false');});});
@@ -650,5 +1141,201 @@ footer .copy-line{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.12);pa
   document.getElementById('copyMsg').addEventListener('click',function(){copyText(document.getElementById('msgOut').value,this);});
 })();
 </script>
+<script>
+(function(){
+  if(!window.gsap)return;
+  // ---- fit stage
+  const wrap=document.getElementById('mo-wrap');
+  const phone=document.getElementById('thiqaPhone');
+  function fit(){const s=phone.clientWidth/360;wrap.style.transform='scale('+s+')';phone.style.height=(640*s)+'px';}
+  fit();addEventListener('resize',fit);new ResizeObserver(fit).observe(phone);
 
-</body></html>
+  // ---- dust
+  const cv=document.getElementById('mo-dust'),cx=cv.getContext('2d');
+  const P=Array.from({length:54},()=>({x:Math.random()*360,y:Math.random()*640,r:Math.random()*2+.5,v:Math.random()*.22+.06,g:Math.random()<.45,a:Math.random()*6.28,o:Math.random()*.5+.3}));
+  (function dust(){cx.clearRect(0,0,360,640);for(const p of P){p.y-=p.v;p.a+=.012;p.x+=Math.sin(p.a)*.18;if(p.y<-5){p.y=645;p.x=Math.random()*360}
+    cx.beginPath();cx.arc(p.x,p.y,p.r,0,7);cx.fillStyle=p.g?`rgba(217,164,65,${.5*p.o})`:`rgba(15,92,110,${.32*p.o})`;cx.fill();}requestAnimationFrame(dust);})();
+
+  // ---- the living ribbon: a wave whose base, amplitude, tilt and phase are tweened between scenes
+  const rb={y:330,amp:52,tilt:0,phase:0,k:0.021,alpha:1};
+  const pT=document.getElementById('mo-rbT'),pG=document.getElementById('mo-rbG'),pF=document.getElementById('mo-rbF');
+  function wave(off,ph,ampMul){let d='';for(let i=0;i<=44;i++){const x=-40+i*10;const y=rb.y+off+rb.amp*ampMul*Math.sin(rb.k*x+rb.phase+ph)+rb.tilt*(x-180)/180;d+=(i?' L':'M')+x.toFixed(1)+' '+y.toFixed(1);}return d;}
+  function drawRibbon(){pT.setAttribute('d',wave(0,0,1));pG.setAttribute('d',wave(12,.45,1.05));pF.setAttribute('d',wave(-18,-.5,.85));
+    pT.style.opacity=rb.alpha;pG.style.opacity=rb.alpha;pF.style.opacity=rb.alpha*.5;}
+  drawRibbon();
+  gsap.to(rb,{phase:'+=6.283',duration:14,repeat:-1,ease:'none',onUpdate:drawRibbon});
+
+  // ---- helpers
+  const root=document.getElementById('thiqaMotion');const $=s=>root.querySelector(s), $$=s=>gsap.utils.toArray(root.querySelectorAll(s));
+  const scenes=$$('#thiqaMotion .mo-sc');
+  gsap.set(scenes,{autoAlpha:0});
+  gsap.set('.mo-ddot',{scale:0});
+  gsap.set(['#mo-rbT','#mo-rbG','#mo-rbF'],{strokeDasharray:1,strokeDashoffset:1});
+  gsap.set('#mo-check',{strokeDasharray:1,strokeDashoffset:1});
+  gsap.set('#mo-shield',{strokeDasharray:1,strokeDashoffset:1});
+  gsap.set('#mo-logo .mo-dot',{scale:0,transformOrigin:'50% 50%'});
+  gsap.set(['#mo-wordA','#mo-wordE'],{y:18,autoAlpha:0,scale:.86,transformOrigin:'50% 70%'});
+  gsap.set(['#mo-latA','#mo-tagA','#mo-tagE','#mo-cta','#mo-contact','#mo-hours','#mo-footE'],{y:14,autoAlpha:0});
+  gsap.set('#mo-latA',{letterSpacing:'18px'});
+  gsap.set('#mo-logo .mo-halo',{scale:.4,autoAlpha:0,transformOrigin:'50% 50%'});
+  gsap.set('#mo-logo .mo-orbit',{scale:.6,autoAlpha:0,transformOrigin:'50% 50%'});
+  gsap.set(['#mo-slogan .mo-w1','#mo-slogan .mo-w2','#mo-slogan .mo-w3','#mo-slogan .mo-w4'],{y:30,autoAlpha:0});
+  gsap.set('#mo-slogan .mo-under',{scaleX:0});
+  gsap.set(['#mo-slogan .mo-kicker','#mo-slogan .mo-lead'],{y:12,autoAlpha:0});
+  gsap.set('.mo-svc',{autoAlpha:0});
+  gsap.set('#mo-svcHead',{y:-10,autoAlpha:0});
+  gsap.set(['#mo-ready .mo-kicker','#mo-ready h2','#mo-ready .mo-note'],{y:14,autoAlpha:0});
+  gsap.set('#mo-ready .mo-rt',{y:22,scale:.85,autoAlpha:0,transformOrigin:'50% 50%'});
+  gsap.set('#mo-ready .mo-rt .mo-ri',{rotate:-25,transformOrigin:'50% 50%'});
+  gsap.set('#mo-stats .mo-tile',{y:24,autoAlpha:0});
+  gsap.set(['#mo-stats .mo-kicker','#mo-stats .mo-big','#mo-stats .mo-big-l'],{y:16,autoAlpha:0});
+  gsap.set(['#mo-stats .mo-arc','#mo-stats .mo-arc2'],{scale:.7,autoAlpha:0,transformOrigin:'50% 50%'});
+  gsap.set('#mo-seal .mo-seal',{scale:.5,autoAlpha:0,transformOrigin:'50% 50%'});
+  gsap.set(['#mo-seal h3','#mo-seal .mo-chip'],{y:16,autoAlpha:0});
+  gsap.set('.mo-spark',{scale:0,transformOrigin:'50% 50%'});
+  gsap.set(['#mo-offer .mo-kicker','#mo-offer h2'],{y:14,autoAlpha:0});
+  gsap.set('#mo-offer .mo-it',{x:40,autoAlpha:0});
+  gsap.set('#mo-markEnd',{scale:1.9,autoAlpha:0,transformOrigin:'50% 50%'});
+  gsap.set('#mo-stem',{scaleY:0});
+  gsap.set('#mo-end .mo-word',{fontSize:52});
+
+  const counters={a:0,b:0,c:0};
+  const n24=$('#mo-n24'),nA=$('#mo-n1000a'),nB=$('#mo-n1000b');
+
+  const O=5.0;
+  const labels=[[0,'افتتاحية'],[2.2,'الشعار'],[7.2,'الوعد'],[10.6,'خدمات جاهزة'],[15.6,'الاستشارات'],[18.6+O,'الخبرة'],[22.6+O,'الاعتماد'],[26.4+O,'ما تحصل عليه'],[29.4+O,'الختام']];
+
+  // ---- master timeline
+  const tl=gsap.timeline({repeat:-1,repeatDelay:.6,defaults:{ease:'power3.out',duration:.8}});
+
+  // 0 · intro: the ribbon is born and dots settle on it
+  tl.set(scenes,{autoAlpha:0}).set('#mo-intro',{autoAlpha:1})
+    .to('#mo-rbT',{strokeDashoffset:0,duration:1.9,ease:'power2.inOut'},0.0)
+    .to('#mo-rbG',{strokeDashoffset:0,duration:1.9,ease:'power2.inOut'},.15)
+    .to('#mo-rbF',{strokeDashoffset:0,duration:1.9,ease:'power2.inOut'},.3)
+    .to('.mo-ddot',{scale:1,duration:.6,ease:'back.out(3)',stagger:.14},.7)
+
+  // 1 · logo: ribbon sinks under the mark; shield draws, fills, check, dots, wordmark
+    .to(rb,{y:470,amp:26,tilt:20,duration:1.4,ease:'power2.inOut',onUpdate:drawRibbon},2.0)
+    .to('.mo-ddot',{scale:0,duration:.5,ease:'power2.in',stagger:.05},2.0)
+    .set('#mo-intro',{autoAlpha:0},2.6)
+    .set('#mo-logo',{autoAlpha:1},2.2)
+    .to('#mo-logo .mo-halo',{scale:1,autoAlpha:1,duration:1.6,ease:'power2.out'},2.4)
+    .to('#mo-shield',{strokeDashoffset:0,duration:1.3,ease:'power2.inOut'},2.3)
+    .to('#mo-shield',{attr:{'fill-opacity':1},duration:.6,ease:'power2.out'},3.4)
+    .to('#mo-check',{strokeDashoffset:0,duration:.55,ease:'power2.out'},3.8)
+    .to('#mo-logo .mo-dot',{scale:1,duration:.55,ease:'back.out(3)',stagger:.14},4.1)
+    .to('#mo-logo .mo-orbit',{scale:1,autoAlpha:1,duration:1.2},4.2)
+    .to('#mo-wordA',{y:0,autoAlpha:1,scale:1,duration:.9,ease:'back.out(1.4)'},4.5)
+    .to('#mo-latA',{y:0,autoAlpha:1,letterSpacing:'6px',duration:.9},4.9)
+    .to('#mo-tagA',{y:0,autoAlpha:1,duration:.7},5.1)
+    // exit: the camera pushes through the mark
+    .to('#mo-logo .mo-col',{scale:1.5,autoAlpha:0,duration:.8,ease:'power2.in',transformOrigin:'50% 40%'},6.5)
+    .to(['#mo-logo .mo-halo','#mo-logo .mo-orbit'],{scale:1.6,autoAlpha:0,duration:.8,ease:'power2.in'},6.5)
+    .set('#mo-logo',{autoAlpha:0},7.3)
+
+  // 2 · slogan: the promise, word by word, gold underlines
+    .to(rb,{y:468,amp:40,tilt:-50,duration:1.3,ease:'power2.inOut',onUpdate:drawRibbon},6.9)
+    .set('#mo-slogan',{autoAlpha:1},7.1)
+    .to('#mo-slogan .mo-kicker',{y:0,autoAlpha:1,duration:.6},7.2)
+    .to('#mo-slogan .mo-w1',{y:0,autoAlpha:1,duration:.7},7.4)
+    .to('#mo-slogan .mo-w2',{y:0,autoAlpha:1,duration:.7},7.6)
+    .to('#mo-slogan .mo-w2 .mo-under',{scaleX:1,duration:.5,ease:'power2.out'},8.0)
+    .to('#mo-slogan .mo-w3',{y:0,autoAlpha:1,duration:.7},8.1)
+    .to('#mo-slogan .mo-w4',{y:0,autoAlpha:1,duration:.7},8.3)
+    .to('#mo-slogan .mo-w4 .mo-under',{scaleX:1,duration:.5,ease:'power2.out'},8.7)
+    .to('#mo-slogan .mo-lead',{y:0,autoAlpha:1,duration:.7},8.8)
+    .to('#mo-slogan .mo-col',{y:-40,autoAlpha:0,duration:.7,ease:'power2.in'},10.3)
+    .set('#mo-slogan',{autoAlpha:0},11.0)
+
+  // 3 · four consultations: each rides in on the ribbon, the previous slides out the other way
+    .set('#mo-services',{autoAlpha:1},15.6)
+    .to('#mo-svcHead',{y:0,autoAlpha:1,duration:.6},15.69);
+  const svcRb=[{y:430,amp:40,tilt:40},{y:450,amp:34,tilt:-36},{y:435,amp:44,tilt:30},{y:455,amp:30,tilt:-44}];
+  for(let i=0;i<4;i++){
+    const t=15.7+i*1.95, el='#mo-sv'+(i+1);
+    tl.to(rb,{...svcRb[i],duration:1.1,ease:'power2.inOut',onUpdate:drawRibbon},t-.2)
+      .set(el,{autoAlpha:1},t)
+      .fromTo(el+' .mo-ico',{scale:.3,autoAlpha:0,rotate:-12},{scale:1,autoAlpha:1,rotate:0,duration:.8,ease:'back.out(1.8)'},t)
+      .fromTo(el+' h2',{x:36,autoAlpha:0},{x:0,autoAlpha:1,duration:.6},t+.2)
+      .fromTo(el+' p',{x:28,autoAlpha:0},{x:0,autoAlpha:1,duration:.6},t+.32)
+      .fromTo(el+' .mo-for',{y:10,autoAlpha:0},{y:0,autoAlpha:1,duration:.5},t+.45)
+      .fromTo(el+' .mo-idx',{autoAlpha:0},{autoAlpha:1,duration:.4},t+.1)
+      .call(()=>{$$('#mo-steps i').forEach((d,j)=>d.classList.toggle('mo-on',j<=i));},null,t+.1)
+      .to(el+' .mo-col',{x:-50,autoAlpha:0,duration:.55,ease:'power2.in'},t+1.5)
+      .to(el+' .mo-idx',{autoAlpha:0,duration:.3},t+1.5)
+      .set(el,{autoAlpha:0},t+2.05);
+  }
+  tl.to(['#mo-svcHead','#mo-steps'],{autoAlpha:0,duration:.4},23.29)
+    .set('#mo-services',{autoAlpha:0},23.69)
+
+  // 3b · six ready-made services pop into a 2×3 grid
+    .to(rb,{y:600,amp:16,tilt:0,alpha:.35,duration:1.2,ease:'power2.inOut',onUpdate:drawRibbon},10.3)
+    .set('#mo-ready',{autoAlpha:1},10.6)
+    .to('#mo-ready .mo-kicker',{y:0,autoAlpha:1,duration:.5},10.7)
+    .to('#mo-ready h2',{y:0,autoAlpha:1,duration:.6},10.85)
+    .to('#mo-ready .mo-rt',{y:0,scale:1,autoAlpha:1,duration:.6,stagger:.17,ease:'back.out(1.5)'},11.1)
+    .to('#mo-ready .mo-rt .mo-ri',{rotate:0,duration:.6,stagger:.17,ease:'back.out(2)'},11.2)
+    .to('#mo-ready .mo-note',{y:0,autoAlpha:1,duration:.5},12.6)
+    .to('#mo-ready .mo-col',{y:-30,autoAlpha:0,duration:.6,ease:'power2.in'},14.7)
+    .set('#mo-ready',{autoAlpha:0},15.3)
+
+  // 4 · numbers: 24 years counts up, two tiles rise
+    .to(rb,{y:520,amp:22,tilt:16,alpha:.55,duration:1.2,ease:'power2.inOut',onUpdate:drawRibbon},23.29)
+    .set('#mo-stats',{autoAlpha:1},23.6)
+    .to(['#mo-stats .mo-arc','#mo-stats .mo-arc2'],{scale:1,autoAlpha:1,duration:1.2,stagger:.1},23.6)
+    .to('#mo-stats .mo-kicker',{y:0,autoAlpha:1,duration:.6},23.8)
+    .to('#mo-stats .mo-big',{y:0,autoAlpha:1,duration:.7},24.0)
+    .to(counters,{a:24,duration:1.3,ease:'power2.out',onUpdate:()=>{n24.textContent=Math.round(counters.a)}},24.0)
+    .to('#mo-stats .mo-big-l',{y:0,autoAlpha:1,duration:.6},24.29)
+    .to('#mo-stats .mo-tile',{y:0,autoAlpha:1,duration:.7,stagger:.18},24.8)
+    .to(counters,{b:1000,c:1000,duration:1.2,ease:'power2.out',onUpdate:()=>{nA.textContent=Math.round(counters.b);nB.textContent=Math.round(counters.c)}},24.91)
+    .to('#mo-stats .mo-col',{y:-30,autoAlpha:0,duration:.6,ease:'power2.in'},27.2)
+    .to(['#mo-stats .mo-arc','#mo-stats .mo-arc2'],{scale:1.3,autoAlpha:0,duration:.6,ease:'power2.in'},27.2)
+    .set('#mo-stats',{autoAlpha:0},27.9)
+
+  // 5 · seal: licence + accreditations, with a light sweep
+    .to(rb,{y:560,amp:18,tilt:-10,alpha:.45,duration:1.2,ease:'power2.inOut',onUpdate:drawRibbon},27.31)
+    .set('#mo-seal',{autoAlpha:1},27.6)
+    .to('#mo-seal .mo-seal',{scale:1,autoAlpha:1,duration:1,ease:'back.out(1.6)'},27.6)
+    .to('.mo-spark',{scale:1,duration:.5,ease:'back.out(3)',stagger:.12},28.2)
+    .to('#mo-seal .mo-shine',{x:260,duration:1.4,ease:'power2.inOut'},28.4)
+    .to('#mo-seal h3',{y:0,autoAlpha:1,duration:.6},28.5)
+    .to('#mo-seal .mo-chip',{y:0,autoAlpha:1,duration:.55,stagger:.16},28.8)
+    .to('#mo-seal .mo-col',{scale:.9,autoAlpha:0,duration:.6,ease:'power2.in',transformOrigin:'50% 30%'},31.0)
+    .to('.mo-spark',{scale:0,duration:.3},31.0)
+    .set('#mo-seal',{autoAlpha:0},31.7)
+
+  // 6 · offer: three concrete deliverables tick in
+    .to(rb,{y:470,amp:30,tilt:30,alpha:.7,duration:1.2,ease:'power2.inOut',onUpdate:drawRibbon},31.1)
+    .set('#mo-offer',{autoAlpha:1},31.4)
+    .to('#mo-offer .mo-kicker',{y:0,autoAlpha:1,duration:.5},31.5)
+    .to('#mo-offer h2',{y:0,autoAlpha:1,duration:.6},31.65)
+    .to('#mo-offer .mo-it',{x:0,autoAlpha:1,duration:.65,stagger:.3,ease:'power3.out'},31.9)
+    .to('#mo-offer .mo-col',{y:-30,autoAlpha:0,duration:.6,ease:'power2.in'},34.1)
+    .set('#mo-offer',{autoAlpha:0},34.8)
+
+  // 7 · closing: mark lands from above, wordmark, CTA, stem to the number
+    .to(rb,{y:585,amp:18,tilt:10,alpha:.4,duration:1.6,ease:'power2.inOut',onUpdate:drawRibbon},34.2)
+    .set('#mo-end',{autoAlpha:1},34.4)
+    .to('#mo-markEnd',{scale:1,autoAlpha:1,duration:1,ease:'power3.out'},34.5)
+    .to('#mo-wordE',{y:0,autoAlpha:1,scale:1,duration:.9,ease:'back.out(1.4)'},34.9)
+    .to('#mo-tagE',{y:0,autoAlpha:1,duration:.6},35.3)
+    .to('#mo-cta',{y:0,autoAlpha:1,duration:.7,ease:'back.out(1.5)'},35.7)
+    .to('#mo-stem',{scaleY:1,duration:.7,ease:'power2.inOut'},36.2)
+    .to('#mo-contact',{y:0,autoAlpha:1,duration:.6},36.7)
+    .to('#mo-hours',{y:0,autoAlpha:1,duration:.5},36.9)
+    .to('#mo-footE',{y:0,autoAlpha:1,duration:.6},37.1)
+    .to('#mo-cta',{scale:1.04,duration:.5,yoyo:true,repeat:1,ease:'sine.inOut'},37.4)
+    .to('#mo-end',{autoAlpha:0,duration:.9,ease:'power2.inOut'},39.2)
+    .to(['#mo-rbT','#mo-rbG','#mo-rbF'],{strokeDashoffset:1,duration:.9,ease:'power2.inOut'},39.1)
+    .to(rb,{y:330,amp:52,tilt:0,alpha:1,duration:.5,onUpdate:drawRibbon},39.6);
+
+
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){tl.progress(0.12).pause();}
+  else{new IntersectionObserver(e=>{e[0].isIntersecting?tl.play():tl.pause();},{threshold:.1}).observe(root);}
+})();
+</script>
+
+</body>
+</html>
