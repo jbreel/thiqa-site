@@ -113,7 +113,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 @media (max-width:900px){.hero .wrap{grid-template-columns:1fr}.card.shift{margin-inline-start:0}.hero{padding-block:44px}}
 
 /* hero motion */
-.phone{position:relative;width:100%;max-width:340px;margin-inline:auto;border-radius:26px;overflow:hidden;box-shadow:0 30px 60px rgba(20,48,58,.18);border:6px solid #14303A;background:#F6F3EC}
+.phone{position:relative;width:100%;max-width:340px;box-sizing:border-box;margin-inline:auto;border-radius:26px;overflow:hidden;box-shadow:0 30px 60px rgba(20,48,58,.18);border:6px solid #14303A;background:#F6F3EC}
 .phone .mo-stage{border-radius:0!important;box-shadow:none!important}
 @media (max-width:900px){.phone{max-width:300px}}
 
@@ -121,7 +121,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 #thiqaMotion *{box-sizing:content-box}
 #thiqaMotion h1,#thiqaMotion h2,#thiqaMotion h3{text-wrap:initial;line-height:1.2}
 #thiqaMotion p{margin:0}
-#thiqaMotion .mo-wrap{position:absolute;top:0;left:0;width:360px;height:640px;transform-origin:top left}
+#thiqaMotion .mo-wrap{position:absolute!important;top:0!important;left:0!important;right:auto!important;margin:0!important;width:360px!important;height:640px!important;transform-origin:top left!important}
 
 /* Layout: one continuous 33s GSAP timeline on a fixed 360×640 stage (9:16), a living ribbon that morphs between
    scenes instead of cutting, and a scrub bar beneath for review. */
